@@ -3,6 +3,7 @@ open Belt
 type blurhash = string
 type color = (float, float, float)
 type pixels = Js.TypedArray2.Uint8ClampedArray.t
+type dataURL = string
 type error = ValidationError(string)
 
 let validateMinLength = (hash: blurhash, min: int): Result.t<blurhash, error> => {
@@ -122,4 +123,15 @@ let decode = (~hash: blurhash, ~width: int, ~height: int, ~punch: int): Result.t
 
     Result.Ok(pixels)
   })
+}
+
+@bs.module("./externals")
+external pixelsToDataURL: (~pixels: pixels, ~width: int, ~height: int) => dataURL =
+  "pixelsToDataURL"
+
+let toDataURL = (~hash: blurhash, ~width: int, ~height: int): option<dataURL> => {
+  switch decode(~hash, ~width, ~height, ~punch=1) {
+  | Result.Ok(pixels) => Some(pixelsToDataURL(~pixels, ~width, ~height))
+  | Result.Error(_) => None
+  }
 }
