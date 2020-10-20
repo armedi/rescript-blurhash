@@ -54,19 +54,28 @@ let decode = (~hash: blurhash, ~width: int, ~height: int, ~punch: int): Result.t
     let quantisedMaximumValue = validHash->Js.String2.charAt(1)->BlurHash_Base83.decode
     let maximumValue = (quantisedMaximumValue + 1)->Int.toFloat /. 166.
 
-    let colors =
-      Array.range(1, numX * numY - 1)->Array.reduce(
-        [validHash->Js.String2.substring(~from=2, ~to_=6)->BlurHash_Base83.decode->decodeDC],
-        (colors, i) => {
-          let color =
-            validHash
-            ->Js.String2.substring(~from=4 + i * 2, ~to_=6 + i * 2)
-            ->BlurHash_Base83.decode
-            ->decodeAC(maximumValue *. punch->Int.toFloat)
+    let colorsLength = numX * numY
+    let colors = Array.make(colorsLength, (0., 0., 0.))
 
-          Array.concat(colors, [color])
-        },
-      )
+    for i in 0 to colorsLength - 1 {
+      switch i {
+      | 0 =>
+        Array.setUnsafe(
+          colors,
+          0,
+          validHash->Js.String2.substring(~from=2, ~to_=6)->BlurHash_Base83.decode->decodeDC,
+        )
+      | i =>
+        Array.setUnsafe(
+          colors,
+          i,
+          validHash
+          ->Js.String2.substring(~from=4 + i * 2, ~to_=6 + i * 2)
+          ->BlurHash_Base83.decode
+          ->decodeAC(maximumValue *. punch->Int.toFloat),
+        )
+      }
+    }
 
     let bytesPerRow = width * 4
     let pixels = Js.TypedArray2.Uint8ClampedArray.fromLength(bytesPerRow * height)
