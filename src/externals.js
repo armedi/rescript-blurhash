@@ -3,6 +3,7 @@
  * @param {Uint8ClampedArray} pixels - image pixels data.
  * @param {number} width - image width.
  * @param {number} height - image height.
+ * @return {string} image dataURL.
  */
 function pixelsToDataURL(pixels, width, height) {
   const canvas = document.createElement('canvas');

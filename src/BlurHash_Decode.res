@@ -1,10 +1,7 @@
 open Belt
+open BlurHash_Common
 
-type blurhash = string
-type color = (float, float, float)
-type pixels = Js.TypedArray2.Uint8ClampedArray.t
-type dataURL = string
-type error = ValidationError(string)
+type floatTriplet = (float, float, float)
 
 let validateMinLength = (hash: blurhash, min: int): Result.t<blurhash, error> => {
   Js.String2.length(hash) >= min
@@ -25,13 +22,13 @@ let validateLength = (hash: blurhash, n: int): Result.t<blurhash, error> => {
       )
 }
 
-let decodeDC = (value: int): color => (
+let decodeDC = (value: int): floatTriplet => (
   value->asr(16)->BlurHash_Utils.sRGBToLinear, // R
   value->asr(8)->land(255)->BlurHash_Utils.sRGBToLinear, // G
   value->land(255)->BlurHash_Utils.sRGBToLinear, // B
 )
 
-let decodeAC = (value: int, maximumValue: float): color => {
+let decodeAC = (value: int, maximumValue: float): floatTriplet => {
   let quantR = (value / (19 * 19))->Int.toFloat
   let quantG = (value / 19)->mod(19)->Int.toFloat
   let quantB = value->mod(19)->Int.toFloat
