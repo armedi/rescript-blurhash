@@ -121,13 +121,6 @@ let decode = (~hash: blurhash, ~width: int, ~height: int, ~punch: int): Result.t
   })
 }
 
-let decode__JS = (~hash: blurhash, ~width: int, ~height: int, ~punch: int): pixels => {
-  switch decode(~hash, ~width, ~height, ~punch) {
-  | Result.Ok(data) => data
-  | Result.Error(ValidationError(message)) => Js.Exn.raiseError(message)
-  }
-}
-
 @bs.module("./externals")
 external pixelsToDataURL: (~pixels: pixels, ~width: int, ~height: int) => dataURL =
   "pixelsToDataURL"
@@ -136,11 +129,4 @@ let toDataURL = (~hash: blurhash, ~width: int, ~height: int): Result.t<dataURL, 
   decode(~hash, ~width, ~height, ~punch=1)->Result.map(pixels =>
     pixelsToDataURL(~pixels, ~width, ~height)
   )
-}
-
-let toDataURL__JS = (~hash: blurhash, ~width: int, ~height: int): dataURL => {
-  switch toDataURL(~hash, ~width, ~height) {
-  | Result.Ok(data) => data
-  | Result.Error(ValidationError(message)) => Js.Exn.raiseError(message)
-  }
 }
