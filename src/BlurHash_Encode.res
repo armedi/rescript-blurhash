@@ -126,3 +126,16 @@ let encode = (
     )
   })
 }
+
+let encode__JS = (
+  ~pixels: pixels,
+  ~width: int,
+  ~height: int,
+  ~componentX: int,
+  ~componentY: int,
+): blurhash => {
+  switch encode(~pixels, ~width, ~height, ~componentX, ~componentY) {
+  | Result.Ok(data) => data
+  | Result.Error(ValidationError(message)) => Js.Exn.raiseError(message)
+  }
+}
