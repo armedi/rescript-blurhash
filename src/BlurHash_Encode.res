@@ -109,10 +109,12 @@ let encode = (
 
     let numberOfComponentsHash =
       Int.toFloat(componentX - 1 + (componentY - 1) * 9)->BlurHash_Base83.encode(1)
+
     let maximumAcComponentValueHash =
       Array.length(ac) > 0
         ? BlurHash_Base83.encode(quantisedMaximumValue, 1)
         : BlurHash_Base83.encode(0., 1)
+
     let averageColorHash = dc->encodeDC->Int.toFloat->BlurHash_Base83.encode(4)
 
     Array.reduce(
