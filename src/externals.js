@@ -5,7 +5,7 @@
  * @param {number} height - image height.
  * @return {string} image dataURL.
  */
-function pixelsToDataURL(pixels, width, height) {
+export function pixelsToDataURL(pixels, width, height) {
   const canvas = document.createElement('canvas');
   canvas.width = width;
   canvas.height = height;
@@ -16,5 +16,3 @@ function pixelsToDataURL(pixels, width, height) {
 
   return canvas.toDataURL();
 }
-
-exports.pixelsToDataURL = pixelsToDataURL;
