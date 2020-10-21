@@ -29,14 +29,13 @@ let decodeDC = (value: int): floatTriplet => (
 )
 
 let decodeAC = (value: int, maximumValue: float): floatTriplet => {
-  let quantR = (value / (19 * 19))->Int.toFloat
-  let quantG = (value / 19)->mod(19)->Int.toFloat
-  let quantB = value->mod(19)->Int.toFloat
+  let decodeComponent = quant =>
+    BlurHash_Utils.signPow(~value=(quant->Int.toFloat -. 9.) /. 9., ~exp=2.) *. maximumValue
 
   (
-    BlurHash_Utils.signPow(~value=(quantR -. 9.) /. 9., ~exp=2.) *. maximumValue,
-    BlurHash_Utils.signPow(~value=(quantG -. 9.) /. 9., ~exp=2.) *. maximumValue,
-    BlurHash_Utils.signPow(~value=(quantB -. 9.) /. 9., ~exp=2.) *. maximumValue,
+    (value / (19 * 19))->decodeComponent, // R
+    (value / 19)->mod(19)->decodeComponent, // G
+    value->mod(19)->decodeComponent, // B
   )
 }
 
@@ -48,7 +47,7 @@ let decode = (~hash: blurhash, ~width: int, ~height: int, ~punch: int): Result.t
   hash
   ->validateMinLength(6)
   ->Result.flatMap(validateLength(_, 4 + 2 * numX * numY))
-  ->Result.flatMap(validHash => {
+  ->Result.map(validHash => {
     let quantisedMaximumValue = validHash->Js.String2.charAt(1)->BlurHash_Base83.decode
     let maximumValue = (quantisedMaximumValue + 1)->Int.toFloat /. 166.
 
@@ -118,7 +117,7 @@ let decode = (~hash: blurhash, ~width: int, ~height: int, ~punch: int): Result.t
       }
     }
 
-    Result.Ok(pixels)
+    pixels
   })
 }
 
