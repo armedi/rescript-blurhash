@@ -1,22 +1,30 @@
 {
   "name": "rescript-blurhash",
   "version": "0.1.0",
+  "description": "BlurHash implementation in ReScript language",
+  "keywords": [
+    "BuckleScript",
+    "ReScript",
+    "BlurHash"
+  ],
+  "author": "Armedi",
+  "license": "MIT",
+  "homepage": "https://github.com/armedi/rescript-blurhash#readme",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/armedi/rescript-blurhash.git"
+  },
   "scripts": {
     "build": "bsb -make-world",
     "start": "bsb -make-world -w",
     "clean": "bsb -clean-world"
   },
-  "keywords": [
-    "ReScript",
-    "blurhash"
-  ],
-  "author": "Armedi",
-  "license": "MIT",
   "devDependencies": {
     "bs-platform": "^8.2.0"
   },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/armedi/rescript-blurhash.git"
-  }
+  "files": [
+    "src/*.re*",
+    "src/externals.js",
+    "bsconfig.json"
+  ]
 }
