@@ -1,5 +1,5 @@
 // for Javascript bundle
-// open lib/js/main.js
+// open lib/js/browser.js
 
 open Belt
 open BlurHash_Common
@@ -17,8 +17,8 @@ let encode = (
   }
 }
 
-let decode = (~hash: blurhash, ~width: int, ~height: int, ~punch: int): pixels => {
-  switch BlurHash_Decode.decode(~hash, ~width, ~height, ~punch) {
+let decode = (~hash: blurhash, ~width: int, ~height: int): pixels => {
+  switch BlurHash_Decode.decode(~hash, ~width, ~height, ~punch=1) {
   | Result.Ok(data) => data
   | Result.Error(ValidationError(message)) => Js.Exn.raiseError(message)
   }
