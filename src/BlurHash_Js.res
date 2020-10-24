@@ -1,5 +1,5 @@
 // for Javascript bundle
-// open lib/js/browser.js
+// open src/browser.js
 
 open Belt
 open BlurHash_Common

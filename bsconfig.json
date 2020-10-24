@@ -1,6 +1,5 @@
 {
   "name": "rescript-blurhash",
-  "version": "0.3.2",
   "sources": {
     "dir": "src",
     "subdirs": true

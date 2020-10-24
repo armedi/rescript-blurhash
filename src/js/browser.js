@@ -1,5 +1,5 @@
-import { toDataURL } from '../../src/BlurHash_Js.bs';
-export * from '../../src/BlurHash_Js.bs';
+import { toDataURL } from '../BlurHash_Js.bs';
+export * from '../BlurHash_Js.bs';
 
 // check if running on main thread
 if (!!self.document) {

@@ -124,7 +124,7 @@ let decode = (~hash: blurhash, ~width: int, ~height: int, ~punch: float): Result
   })
 }
 
-@bs.module("./externals")
+@bs.module("./js/externals")
 external pixelsToDataURL: (~pixels: pixels, ~width: int, ~height: int) => dataURL =
   "pixelsToDataURL"
 
