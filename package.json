@@ -1,6 +1,6 @@
 {
   "name": "rescript-blurhash",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "BlurHash implementation in ReScript language",
   "keywords": [
     "BuckleScript",
@@ -28,7 +28,7 @@
   },
   "files": [
     "bsconfig.json",
-    "src/*.re*",
+    "src/*.res*",
     "src/externals.js",
     "dist/production.min.js"
   ]
