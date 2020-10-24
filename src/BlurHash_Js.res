@@ -18,7 +18,7 @@ let encode = (
 }
 
 let decode = (~hash: blurhash, ~width: int, ~height: int): pixels => {
-  switch BlurHash_Decode.decode(~hash, ~width, ~height, ~punch=1) {
+  switch BlurHash_Decode.decode(~hash, ~width, ~height, ~punch=1.) {
   | Result.Ok(data) => data
   | Result.Error(ValidationError(message)) => Js.Exn.raiseError(message)
   }

@@ -2,7 +2,7 @@ let decode: (
   ~hash: BlurHash_Common.blurhash,
   ~width: int,
   ~height: int,
-  ~punch: int,
+  ~punch: float,
 ) => Belt.Result.t<BlurHash_Common.pixels, BlurHash_Common.error>
 
 let toDataURL: (

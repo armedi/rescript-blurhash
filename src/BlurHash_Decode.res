@@ -39,7 +39,10 @@ let decodeAC = (value: int, maximumValue: float): floatTriplet => {
   )
 }
 
-let decode = (~hash: blurhash, ~width: int, ~height: int, ~punch: int): Result.t<pixels, error> => {
+let decode = (~hash: blurhash, ~width: int, ~height: int, ~punch: float): Result.t<
+  pixels,
+  error,
+> => {
   let sizeFlag = hash->Js.String2.charAt(0)->BlurHash_Base83.decode
   let numY = (sizeFlag->Int.toFloat /. 9.)->Js.Math.floor + 1
   let numX = mod(sizeFlag, 9) + 1
@@ -69,7 +72,7 @@ let decode = (~hash: blurhash, ~width: int, ~height: int, ~punch: int): Result.t
           validHash
           ->Js.String2.substring(~from=4 + i * 2, ~to_=6 + i * 2)
           ->BlurHash_Base83.decode
-          ->decodeAC(maximumValue *. punch->Int.toFloat),
+          ->decodeAC(maximumValue *. punch),
         )
       }
     }
@@ -126,7 +129,7 @@ external pixelsToDataURL: (~pixels: pixels, ~width: int, ~height: int) => dataUR
   "pixelsToDataURL"
 
 let toDataURL = (~hash: blurhash, ~width: int, ~height: int): Result.t<dataURL, error> => {
-  decode(~hash, ~width, ~height, ~punch=1)->Result.map(pixels =>
+  decode(~hash, ~width, ~height, ~punch=1.)->Result.map(pixels =>
     pixelsToDataURL(~pixels, ~width, ~height)
   )
 }
