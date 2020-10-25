@@ -35,6 +35,8 @@ In the gif below, the right image is with blurhash, and the left is without blur
 
 ![example](https://media.giphy.com/media/RgdqZGcfue2ZwrpfxV/giphy.gif)
 
+## Usage in ReScript or ReasonML project
+
 ### Installation
 
 ```sh
@@ -49,8 +51,6 @@ Then add rescript-blurhash to bs-dependencies in your bsconfig.json:
   "bs-dependencies": ["rescript-blurhash"]
 }
 ```
-
-## Usage in ReScript or ReasonML project
 
 ### Interface
 

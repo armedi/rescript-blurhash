@@ -1,31 +1,30 @@
 // for Javascript bundle
-// open src/browser.js
+// open src/js/browser.js
 
 open Belt
-open BlurHash_Common
 
 let encode = (
-  ~pixels: pixels,
+  ~pixels: BlurHash.pixels,
   ~width: int,
   ~height: int,
   ~componentX: int,
   ~componentY: int,
-): blurhash => {
-  switch BlurHash_Encode.encode(~pixels, ~width, ~height, ~componentX, ~componentY) {
+): BlurHash.t => {
+  switch BlurHash.encode(~pixels, ~width, ~height, ~componentX, ~componentY) {
   | Result.Ok(data) => data
   | Result.Error(ValidationError(message)) => Js.Exn.raiseError(message)
   }
 }
 
-let decode = (~hash: blurhash, ~width: int, ~height: int): pixels => {
-  switch BlurHash_Decode.decode(~hash, ~width, ~height, ~punch=1.) {
+let decode = (~hash: BlurHash.t, ~width: int, ~height: int): BlurHash.pixels => {
+  switch BlurHash.decode(~hash, ~width, ~height, ~punch=1.) {
   | Result.Ok(data) => data
   | Result.Error(ValidationError(message)) => Js.Exn.raiseError(message)
   }
 }
 
-let toDataURL = (~hash: blurhash, ~width: int, ~height: int): dataURL => {
-  switch BlurHash_Decode.toDataURL(~hash, ~width, ~height) {
+let toDataURL = (~hash: BlurHash.t, ~width: int, ~height: int): BlurHash.dataURL => {
+  switch BlurHash.toDataURL(~hash, ~width, ~height) {
   | Result.Ok(data) => data
   | Result.Error(ValidationError(message)) => Js.Exn.raiseError(message)
   }
