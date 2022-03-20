@@ -1,8 +1,11 @@
-.DS_Store
 node_modules
-npm-debug.log
-/dist/
-.merlin
+.DS_Store
+dist
+dist-ssr
+*.local
+
+# ReScript
 .bsb.lock
-/lib/bs/
-/**/*.bs.js
+.merlin
+/lib/
+*.bs.js

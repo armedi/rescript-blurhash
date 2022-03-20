@@ -1,13 +1,16 @@
 {
   "name": "rescript-blurhash-example",
-  "reason": {
-    "react-jsx": 3
-  },
-  "sources": {
-    "dir": "src",
-    "subdirs": true
-  },
-  "bsc-flags": ["-bs-super-errors", "-bs-no-version-header"],
+  "sources": [
+    {
+      "dir": "src",
+      "subdirs": true
+    },
+    {
+      "dir": "tests",
+      "type": "dev",
+      "subdirs": true
+    }
+  ],
   "package-specs": [
     {
       "module": "es6",
@@ -15,7 +18,16 @@
     }
   ],
   "suffix": ".bs.js",
-  "namespace": true,
-  "bs-dependencies": ["reason-react", "rescript-blurhash"],
-  "refmt": 3
+  "reason": {
+    "react-jsx": 3
+  },
+  "bs-dependencies": [
+    "@rescript/react",
+    "@ryyppy/rescript-promise",
+    "rescript-webapi",
+    "rescript-blurhash"
+  ],
+  "bs-dev-dependencies": [
+    "rescript-vitest"
+  ]
 }
