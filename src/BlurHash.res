@@ -123,13 +123,12 @@ module Encode = {
 
       let averageColorHash = dc->encodeDC->Int.toFloat->BlurHash_Base83.encode(4)
 
-      Array.reduce(
-        ac,
-        numberOfComponentsHash ++ maximumAcComponentValueHash ++ averageColorHash,
-        (finalHash, factor) => {
-          finalHash ++ factor->encodeAC(maximumValue)->Int.toFloat->BlurHash_Base83.encode(2)
-        },
-      )
+      Array.reduce(ac, numberOfComponentsHash ++ maximumAcComponentValueHash ++ averageColorHash, (
+        finalHash,
+        factor,
+      ) => {
+        finalHash ++ factor->encodeAC(maximumValue)->Int.toFloat->BlurHash_Base83.encode(2)
+      })
     })
   }
 }
@@ -255,7 +254,7 @@ module Decode = {
     })
   }
 
-  @bs.module("./js/externals")
+  @module("./js/externals")
   external pixelsToDataURL: (~pixels: pixels, ~width: int, ~height: int) => dataURL =
     "pixelsToDataURL"
 

@@ -1,6 +1,6 @@
 {
   "name": "rescript-blurhash",
-  "version": "0.3.2",
+  "version": "0.4.0",
   "description": "BlurHash implementation in ReScript language",
   "keywords": [
     "BuckleScript",
@@ -16,15 +16,16 @@
   },
   "unpkg": "dist/production.min.js",
   "scripts": {
-    "build": "bsb -make-world",
-    "start": "bsb -make-world -w",
-    "clean": "bsb -clean-world",
+    "build": "rescript",
+    "start": "rescript build -w",
+    "clean": "rescript clean -with-deps",
+    "format": "rescript format -all",
     "bundle": "npm run build && npx esbuild --bundle src/js/browser.js --outfile=dist/production.min.js --global-name=BlurHash --minify",
     "prepublishOnly": "npm run bundle"
   },
   "devDependencies": {
-    "bs-platform": "^8.2.0",
-    "esbuild": "^0.7.19"
+    "esbuild": "^0.14.27",
+    "rescript": "^9.1.4"
   },
   "files": [
     "bsconfig.json",
