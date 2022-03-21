@@ -7,7 +7,7 @@
 You can use this in plain html by simply inserting a script tag, then add `data-blurhash` attribute in image.
 
 ```html
-<script src="https://unpkg.com/rescript-blurhash@0.3.1/dist/production.min.js"></script>
+<script src="https://unpkg.com/rescript-blurhash@0.4.0/dist/production.min.js"></script>
 ```
 
 The script will automatically replace all images with `data-blurhash` attribute with the blurred version of the image. When the original image is loaded it will change back the blurred image with the original one.
@@ -26,7 +26,7 @@ The script will automatically replace all images with `data-blurhash` attribute 
       data-blurhash="LEHV6nWB2yk8pyo0adR*.7kCMdnj"
       style="width: 269px; height: 173px"
     />
-    <script src="https://unpkg.com/rescript-blurhash@0.3.1/dist/production.min.js"></script>
+    <script src="https://unpkg.com/rescript-blurhash@0.4.0/dist/production.min.js"></script>
   </body>
 </html>
 ```
@@ -54,7 +54,7 @@ Then add rescript-blurhash to bs-dependencies in your bsconfig.json:
 
 ### Interface
 
-```reason
+```rescript
 type t = string;
 type pixels = Js.TypedArray2.Uint8ClampedArray.t;
 type dataURL = string;
@@ -80,10 +80,10 @@ let encode:
   Belt.Result.t(t, error);
 ```
 
-### Example in ReasonReact
+### Example in rescript-react
 
-```reason
-[@react.component]
+```rescript
+@react.component
 let make = () => {
   let dataURL =
     switch (
