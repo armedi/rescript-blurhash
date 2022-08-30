@@ -25,6 +25,6 @@
     "jsdom": "^19.0.0",
     "rescript": "^9.1.3",
     "rescript-vitest": "^0.2.0",
-    "vite": "^2.8.0"
+    "vite": "^2.9.13"
   }
 }
